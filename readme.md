@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/mlv3be4chrumymp2/branch/master?svg=true)](https://ci.appveyor.com/project/Aftnet/ffmpegwin/branch/master)
+
 # FFmpeg Windows builds
 
 Visual Studio builds of the FFMPEG libraries as shared DLLs, unmodified from their source repo.
