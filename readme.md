@@ -1,4 +1,4 @@
-# FFMPEG Windows builds
+# FFmpeg Windows builds
 
 Visual Studio builds of the FFMPEG libraries as shared DLLs, unmodified from their source repo.
 
