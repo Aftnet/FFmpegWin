@@ -76,9 +76,6 @@ export LIB="$WINSDKUCRTLibDir;$WINSDKUMLibDir;$VSATLMFCLibDir;$VSLibDir"
 export LIBPATH="$VSATLMFCLibDir;$VSLibDir"
 export INCLUDE="$VSIncludeDir;$WINSDKSharedIncludeDir;$WINSDKUCRTIncludeDir;$WINSDKUMIncludeDir;$VSATLMFCIncludeDir"
 
-mkdir -p "$OBJPATH"
-cd "$OBJPATH"
-
 if [ $TARGETSUBSYSTEM == "uwp" ]
 then
     EXTRA_CFLAGS="-MD -DWINAPI_FAMILY=WINAPI_FAMILY_APP -D_WIN32_WINNT=0x0A00"
@@ -111,7 +108,9 @@ else
     exit
 fi
 
-../../configure --logfile=config_log.txt --toolchain=msvc --disable-programs --disable-d3d11va --disable-dxva2 --enable-shared --enable-cross-compile --target-os=win32 $CPUFLAGS --extra-cflags="$EXTRA_CFLAGS" --extra-ldflags="$EXTRA_LDFLAGS" --prefix="../../$BUILDPATH"
+mkdir -p "$OBJPATH"
+cd "$OBJPATH"
+./ffmpeg/configure --logfile=config_log.txt --toolchain=msvc --disable-programs --disable-d3d11va --disable-dxva2 --enable-shared --enable-cross-compile --target-os=win32 $CPUFLAGS --extra-cflags="$EXTRA_CFLAGS" --extra-ldflags="$EXTRA_LDFLAGS" --prefix="$BUILDPATH"
 
 make -j4
 make install
