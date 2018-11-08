@@ -40,13 +40,15 @@ VCTOOLSDIR="$VSROOTDIR\VC\Tools\MSVC\\$VCTOOLSVERSION"
 
 echo "Detected Visual C++ tools dir: $VCTOOLSDIR"
 
-#Add this to path. Contains VS compiler/linker execs for host/target arch
+#Add these to path. Contains VS compiler/linker execs for host/target arch
 VCIDEDIR="$VSROOTDIR\Common7\IDE"
 VCIDEDIR=`cygpath "$VCIDEDIR"`
 VCCOMPILERDIR="$VCTOOLSDIR\bin\Host$HOSTARCH\\$TARGETARCH"
 VCCOMPILERDIR=`cygpath "$VCCOMPILERDIR"`
 VCCOMPILERFALLBACKDIR="$VCTOOLSDIR\bin\Host$HOSTARCH\\$HOSTARCH"
 VCCOMPILERFALLBACKDIR=`cygpath "$VCCOMPILERFALLBACKDIR"`
+BINTOOLSDIR="$PWD/bintools/$HOSTARCH"
+SCRIPTSDIR="$PWD/scripts"
 
 WINSDKROOTDIR=`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\Windows\v10.0" -v "InstallationFolder" | grep -o "$WINDOWSPATHREGEX"`
 WINSDKVERSION=`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\Windows\v10.0" -v "ProductVersion" | grep -o "[0-9]*\.[0-9]*\.[0-9]*"`
@@ -71,7 +73,7 @@ fi
 VSATLMFCLibDir="${VCTOOLSDIR}\atlmfc\lib\\$TARGETARCH"
 
 #Setting env variables
-PATH="$VCCOMPILERDIR:$VCCOMPILERFALLBACKDIR:$VCIDEDIR:$PATH"
+PATH="$VCCOMPILERDIR:$VCCOMPILERFALLBACKDIR:$VCIDEDIR:$BINTOOLSDIR:$SCRIPTSDIR:$PATH"
 export LIB="$WINSDKUCRTLibDir;$WINSDKUMLibDir;$VSATLMFCLibDir;$VSLibDir"
 export LIBPATH="$VSATLMFCLibDir;$VSLibDir"
 export INCLUDE="$VSIncludeDir;$WINSDKSharedIncludeDir;$WINSDKUCRTIncludeDir;$WINSDKUMIncludeDir;$VSATLMFCIncludeDir"
@@ -110,7 +112,7 @@ fi
 
 mkdir -p "$OBJPATH"
 cd "$OBJPATH"
-./ffmpeg/configure --logfile=config_log.txt --toolchain=msvc --disable-programs --disable-d3d11va --disable-dxva2 --enable-shared --enable-cross-compile --target-os=win32 $CPUFLAGS --extra-cflags="$EXTRA_CFLAGS" --extra-ldflags="$EXTRA_LDFLAGS" --prefix="$BUILDPATH"
+../../ffmpeg/configure --logfile=config_log.txt --toolchain=msvc --disable-programs --disable-d3d11va --disable-dxva2 --enable-shared --enable-cross-compile --target-os=win32 $CPUFLAGS --extra-cflags="$EXTRA_CFLAGS" --extra-ldflags="$EXTRA_LDFLAGS" --prefix="../../$BUILDPATH"
 
 make -j4
 make install
