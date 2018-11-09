@@ -15,7 +15,7 @@ platform:
 #  - desktop-arm64
 
 init:
-  - ps: $env:Path+=";C:\msys64\usr\bin"
+  - ps: $env:Path="C:\msys64\usr\bin;"+$env:Path
 
 before_build:
   - ps: git submodule update -q --init --recursive

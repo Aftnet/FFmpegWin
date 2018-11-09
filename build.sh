@@ -1,6 +1,3 @@
-which make
-exit 1
-
 TARGETCONFIG=$1
 
 if [ $TARGETCONFIG != "desktop-x64" ] && [ $TARGETCONFIG != "desktop-x86" ] && [ $TARGETCONFIG != "desktop-arm64" ] && [ $TARGETCONFIG != "uwp-x64" ] && [ $TARGETCONFIG != "uwp-x86" ]  && [ $TARGETCONFIG != "uwp-arm64" ] && [ $TARGETCONFIG != "uwp-arm" ]
