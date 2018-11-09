@@ -21,7 +21,4 @@ build_script:
   - ps: bash -c "./build.sh $env:platform"
 
 artifacts:
-  - path: '**\%target_name%*.dll'
-  - path: '**\%target_name%*.lib'
-  - path: '**\%target_name%*.pdb'
-  - path: '**\libretro.h'
+  - path: '**\*.zip'

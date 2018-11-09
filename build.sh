@@ -9,7 +9,6 @@ fi
 TARGETSUBSYSTEM=`echo $TARGETCONFIG | grep -o "\\w*-" | grep -o "\\w*"`
 TARGETARCH=`echo $TARGETCONFIG | grep -o "\-\\w*" | grep -o "\\w*"`
 echo "Building for $TARGETSUBSYSTEM, $TARGETARCH"
-exit 1
 
 if [ $PROCESSOR_ARCHITECTURE == "x86" ]
 then
@@ -111,6 +110,7 @@ fi
 
 mkdir -p "$OBJPATH"
 cd "$OBJPATH"
+echo "Configuring build. This will take a while"
 ../../ffmpeg/configure --logfile=config_log.txt --toolchain=msvc --disable-programs --disable-d3d11va --disable-dxva2 --enable-shared --enable-cross-compile --target-os=win32 $CPUFLAGS --extra-cflags="$EXTRA_CFLAGS" --extra-ldflags="$EXTRA_LDFLAGS" --prefix="../../$BUILDPATH"
 
 make -j4
