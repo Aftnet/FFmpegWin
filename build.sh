@@ -1,3 +1,6 @@
+which make
+exit 1
+
 TARGETCONFIG=$1
 
 if [ $TARGETCONFIG != "desktop-x64" ] && [ $TARGETCONFIG != "desktop-x86" ] && [ $TARGETCONFIG != "desktop-arm64" ] && [ $TARGETCONFIG != "uwp-x64" ] && [ $TARGETCONFIG != "uwp-x86" ]  && [ $TARGETCONFIG != "uwp-arm64" ] && [ $TARGETCONFIG != "uwp-arm" ]
@@ -113,5 +116,6 @@ cd "$OBJPATH"
 echo "Configuring build. This will take a while"
 ../../ffmpeg/configure --logfile=config_log.txt --toolchain=msvc --disable-programs --disable-d3d11va --disable-dxva2 --enable-shared --enable-cross-compile --target-os=win32 $CPUFLAGS --extra-cflags="$EXTRA_CFLAGS" --extra-ldflags="$EXTRA_LDFLAGS" --prefix="../../$BUILDPATH"
 
+echo "Starting build"
 make -j4
 make install
