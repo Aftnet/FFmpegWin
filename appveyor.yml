@@ -6,13 +6,13 @@ configuration:
   - release
 
 platform:
-  - uwp_x64
-#  - uwp_x86
-#  - uwp_arm64
-#  - uwp_arm
-#  - desktop_x64
-#  - desktop_x86
-#  - desktop_arm64
+  - uwp-x64
+#  - uwp-x86
+#  - uwp-arm64
+#  - uwp-arm
+#  - desktop-x64
+#  - desktop-x86
+#  - desktop-arm64
 
 init:
   - ps: $env:Path+=";C:\msys64\usr\bin"

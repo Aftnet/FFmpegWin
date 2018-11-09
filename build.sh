@@ -1,16 +1,15 @@
-TARGETSUBSYSTEM=$1
-if [ $TARGETSUBSYSTEM != "uwp" ] && [ $TARGETSUBSYSTEM != "desktop" ]
+TARGETCONFIG=$1
+
+if [ $TARGETCONFIG != "desktop-x64" ] && [ $TARGETCONFIG != "desktop-x86" ] && [ $TARGETCONFIG != "desktop-arm64" ] && [ $TARGETCONFIG != "uwp-x64" ] && [ $TARGETCONFIG != "uwp-x86" ]  && [ $TARGETCONFIG != "uwp-arm64" ] && [ $TARGETCONFIG != "uwp-arm" ]
 then
-    echo "Invalid target subsystem. Choose either uwp or desktop"
-    exit
+    echo "Invalid target configuration"
+    exit 1
 fi
 
-TARGETARCH=$2
-if [ $TARGETARCH != "x86" ] && [ $TARGETARCH != "x64" ] && [ $TARGETARCH != "arm" ] && [ $TARGETARCH != "arm64" ]
-then
-    echo "Invalid target architecture. Choose either x86/x64/arm/arm64"
-    exit
-fi
+TARGETSUBSYSTEM=`echo $TARGETCONFIG | grep -o "\\w*-" | grep -o "\\w*"`
+TARGETARCH=`echo $TARGETCONFIG | grep -o "\-\\w*" | grep -o "\\w*"`
+echo "Building for $TARGETSUBSYSTEM, $TARGETARCH"
+exit 1
 
 if [ $PROCESSOR_ARCHITECTURE == "x86" ]
 then
@@ -20,12 +19,12 @@ then
     HOSTARCH="x64"
 else
     echo "Unrecognized host architecture. Aborting"
-    exit
+    exit 1
 fi
 
 #Output directories
-OBJPATH="Obj/${TARGETSUBSYSTEM}_${TARGETARCH}"
-BUILDPATH="Build/${TARGETSUBSYSTEM}_${TARGETARCH}"
+OBJPATH="Obj/$TARGETCONFIG"
+BUILDPATH="Build/$TARGETCONFIG"
 
 WINDOWSPATHREGEX="\w:\\\\.*"
 
@@ -88,7 +87,7 @@ then
     EXTRA_LDFLAGS="kernel32.lib"
 else
     echo "Unable to build for $TARGETSUBSYSTEM"
-    exit
+    exit 1
 fi
 
 if [ $TARGETARCH == "x86" ]
@@ -107,7 +106,7 @@ then
     EXTRA_CFLAGS="$EXTRA_CFLAGS -D__ARM_PCS_VFP"
 else
     echo "Unable to build for $TARGETSUBSYSTEM $TARGETARCH"
-    exit
+    exit 1
 fi
 
 mkdir -p "$OBJPATH"
