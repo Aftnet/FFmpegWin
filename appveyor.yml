@@ -2,27 +2,23 @@ version: 0.1.{build}
 
 image: Visual Studio 2017
 
-environment:
-  makefile_location: 'desmume\src\frontend\libretro'
-  makefile_name: Makefile
-  target_name: desmume_libretro
-
 configuration:
   - release
 
 platform:
-  - windows_msvc2017_uwp_x64
-  - windows_msvc2017_uwp_x86
-  - windows_msvc2017_uwp_arm
-  - windows_msvc2017_desktop_x64
-  - windows_msvc2017_desktop_x86
+  - uwp_x64
+#  - uwp_x86
+#  - uwp_arm64
+#  - uwp_arm
+#  - desktop_x64
+#  - desktop_x86
+#  - desktop_arm64
 
 init:
-  - set Path=C:\msys64\usr\bin;%Path%
+  - ps: $env:Path+=";C:\msys64\usr\bin"
 
 build_script:
-  - cd %makefile_location%
-  - make -f %makefile_name% platform=%platform%
+  - ps: bash -c "./build.sh $env:platform"
 
 artifacts:
   - path: '**\%target_name%*.dll'
