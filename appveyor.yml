@@ -17,6 +17,9 @@ platform:
 init:
   - ps: $env:Path+=";C:\msys64\usr\bin"
 
+before_build:
+  - ps: git submodule update
+
 build_script:
   - ps: bash -c "./build.sh $env:platform"
 
