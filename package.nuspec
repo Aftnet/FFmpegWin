@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>FFmpegWin</id>
+    <version>0.1</version>
+    <title>FFmpeg</title>
+    <projectUrl>https://www.globalgraphics.com/products/mako-sdk</projectUrl>
+    <authors>Alberto Fustinoni</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>FFmpeg built and packaged as Nuget package</description>
+    <tags>FFmpeg Native</tags>
+  </metadata>  
+
+  <files>
+    <file src="*.props" target="build" />
+    <file src="Build\desktop-x64\include\**" target="build\native\include" />
+
+    <file src="Build\uwp-x86\bin\*.lib" target="build\native\libs\uwp-x86" />
+    <file src="Build\uwp-x86\bin\*.dll" target="build\native\dlls\uwp-x86" />
+
+    <file src="Build\desktop-x64\bin\*.lib" target="build\native\libs\desktop-x64" />
+    <file src="Build\desktop-x64\bin\*.dll" target="build\native\dlls\desktop-x64" />
+  </files>
+</package>

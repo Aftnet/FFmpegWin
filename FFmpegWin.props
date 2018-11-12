@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Choose>  
+        <When Condition="'$(ApplicationType)'=='Windows Store'">  
+            <PropertyGroup Condition="'$(Platform)'=='x64'">
+                <FFMpegWinTargetMoniker>uwp-x64</FFMpegWinTargetMoniker>
+            </PropertyGroup>
+             <PropertyGroup Condition="'$(Platform)'=='Win32'">
+                <FFMpegWinTargetMoniker>uwp-x86</FFMpegWinTargetMoniker>
+            </PropertyGroup>
+             <PropertyGroup Condition="'$(Platform)'=='ARM64'">
+                <FFMpegWinTargetMoniker>uwp-arm64</FFMpegWinTargetMoniker>
+            </PropertyGroup>
+             <PropertyGroup Condition="'$(Platform)'=='ARM'">
+                <FFMpegWinTargetMoniker>uwp-arm</FFMpegWinTargetMoniker>
+            </PropertyGroup>
+        </When>    
+        <Otherwise>  
+            <PropertyGroup Condition="'$(Platform)'=='x64'">
+                <FFMpegWinTargetMoniker>desktop-x64</FFMpegWinTargetMoniker>
+            </PropertyGroup>
+             <PropertyGroup Condition="'$(Platform)'=='Win32'">
+                <FFMpegWinTargetMoniker>desktop-x86</FFMpegWinTargetMoniker>
+            </PropertyGroup>
+             <PropertyGroup Condition="'$(Platform)'=='ARM64'">
+                <FFMpegWinTargetMoniker>desktop-arm64</FFMpegWinTargetMoniker>
+            </PropertyGroup>
+        </Otherwise>  
+    </Choose>
+
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)native\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+        </ClCompile>
+        <Link>
+            <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\$(FFMpegWinTargetMoniker)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+        </Link>
+        <PostBuildEvent>
+            <Command>xcopy /y "$(MSBuildThisFileDirectory)native\dlls\$(FFMpegWinTargetMoniker)\*.dll" "$(OutDir)"</Command>
+        </PostBuildEvent>
+    </ItemDefinitionGroup>
+</Project>
