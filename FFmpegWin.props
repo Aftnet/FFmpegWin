@@ -19,13 +19,16 @@
             <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\uwp-$(FFMpegWinArch)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
         </Link>
     </ItemDefinitionGroup>
+
     <ItemDefinitionGroup Condition="'$(TargetPlatformIdentifier)' != 'UAP'">
         <Link>
             <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\desktop-$(FFMpegWinArch)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
         </Link>
     </ItemDefinitionGroup>
-
-    <ItemGroup>
-        <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)native\dlls\$(FFMpegWinTargetMoniker)\*.dll" />
+    <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'UAP'">
+        <CopyFileToFolders Include="$(MSBuildThisFileDirectory)native\dlls\desktop-$(FFMpegWinArch)\*.dll">
+            <DeploymentContent>true</DeploymentContent>
+            <FileType>Document</FileType>
+        </CopyFileToFolders>
     </ItemGroup>
 </Project>
