@@ -9,7 +9,7 @@
 
     <ItemDefinitionGroup>
         <ClCompile>
-            <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)native\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+            <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
             <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -18,11 +18,11 @@
 
     <ItemDefinitionGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
         <Link>
-            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\uwp-$(FFMpegWinArch)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)..\..\link\win10-$(FFMpegWinArch)-aot\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
         </Link>
     </ItemDefinitionGroup>
     <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
-        <CopyFileToFolders Include="$(MSBuildThisFileDirectory)native\dlls\uwp-$(FFMpegWinArch)\*.dll">
+        <CopyFileToFolders Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(FFMpegWinArch)-aot\native\*.dll">
             <DeploymentContent>true</DeploymentContent>
             <FileType>Document</FileType>
         </CopyFileToFolders>
@@ -30,11 +30,11 @@
 
     <ItemDefinitionGroup Condition="'$(TargetPlatformIdentifier)' != 'UAP'">
         <Link>
-            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)native\libs\desktop-$(FFMpegWinArch)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)..\..\link\win10-$(FFMpegWinArch)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
         </Link>
     </ItemDefinitionGroup>
     <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'UAP'">
-        <CopyFileToFolders Include="$(MSBuildThisFileDirectory)native\dlls\desktop-$(FFMpegWinArch)\*.dll">
+        <CopyFileToFolders Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(FFMpegWinArch)\native\*.dll">
             <DeploymentContent>true</DeploymentContent>
             <FileType>Document</FileType>
         </CopyFileToFolders>
