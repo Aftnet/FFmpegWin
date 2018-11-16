@@ -24,7 +24,7 @@ build_script:
   - bash -c "./build.sh %PLATFORM%
 
 after_build:
-  - ps: Compress-Archive -Path ".\Build\$platform\*" -DestinationPath ".\ffmpeg_$platform.zip"
+  - ps: Compress-Archive -Path ".\Build\$env:platform\*" -DestinationPath ".\ffmpeg_$env:platform.zip"
 
 artifacts:
   - path: '**\*.zip'
