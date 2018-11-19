@@ -18,7 +18,7 @@ foreach($i in $projectObject.build.jobs) {
             $localArtifactPath = Join-Path $downloadDirectory $j.fileName
             echo "Downloading $artifactUrl to $localArtifactPath"
             Invoke-RestMethod -Method Get -Uri $artifactUrl -OutFile $localArtifactPath -Headers $headers
-            $localArtifactDir = $localArtifactPath.Replace(".zip", "")
+            $localArtifactDir = $localArtifactPath.Replace(".zip", "").Replace("ffmpeg_", "")
             Expand-Archive -Path $localArtifactPath -DestinationPath $localArtifactDir
         }
     }
