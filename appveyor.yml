@@ -7,24 +7,43 @@ configuration:
 
 platform:
   - uwp-x64
-#  - uwp-x86
+  - uwp-x86
 #  - uwp-arm64
 #  - uwp-arm
 #  - desktop-x64
 #  - desktop-x86
 #  - desktop-arm64
+  - nuget
 
-init:
-  - ps: $env:Path="C:\msys64\usr\bin;"+$env:Path
+for:
+-
+  matrix:
+    except:
+      - platform: nuget
 
-before_build:
-  - ps: git submodule update -q --init --recursive
+#  init:
+#    - ps: $env:Path="C:\msys64\usr\bin;"+$env:Path
 
-build_script:
-  - bash -c "./build.sh %PLATFORM%
+#  before_build:
+#    - ps: git submodule update -q --init --recursive
 
-after_build:
-  - ps: Compress-Archive -Path ".\Build\$env:platform\*" -DestinationPath ".\ffmpeg_$env:platform.zip"
+  build_script:
+#    - bash -c "./build.sh %PLATFORM%
+    - ps: echo "Building $env:platform"
 
-artifacts:
-  - path: '**\*.zip'
+  after_build:
+#    - ps: Compress-Archive -Path ".\Build\$env:platform\*" -DestinationPath ".\ffmpeg_$env:platform.zip"
+
+  artifacts:
+#    - path: '**\*.zip'
+
+-
+  matrix:
+    only:
+      - platform: nuget
+
+  build_script:
+  - ps: echo "Building nuget"
+
+  artifacts:
+    - path: '**\*.nuget'
