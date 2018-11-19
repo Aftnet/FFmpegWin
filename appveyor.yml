@@ -8,11 +8,11 @@ configuration:
 platform:
   - uwp-x64
   - uwp-x86
-#  - uwp-arm64
-#  - uwp-arm
+  - uwp-arm64
+  - uwp-arm
   - desktop-x64
-#  - desktop-x86
-#  - desktop-arm64
+  - desktop-x86
+  - desktop-arm64
   - nuget
 
 for:
@@ -46,4 +46,4 @@ for:
     - ps: nuget pack package.nuspec
 
   artifacts:
-    - path: '**\*.nuget'
+    - path: '**\*.nupkg'
