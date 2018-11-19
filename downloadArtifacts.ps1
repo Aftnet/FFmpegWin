@@ -4,6 +4,7 @@ $headers = @{
 }
 
 $downloadDirectory = "Build"
+New-Item -Path $downloadDirectory -ItemType directory -Force
 $account = "Aftnet"
 $project = "ffmpegwin"
 $projectObject = Invoke-RestMethod -Method Get -Uri "$apiUrl/projects/$account/$project" -Headers $headers
