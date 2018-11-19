@@ -21,21 +21,20 @@ for:
     except:
       - platform: nuget
 
-#  init:
-#    - ps: $env:Path="C:\msys64\usr\bin;"+$env:Path
+  init:
+    - ps: $env:Path="C:\msys64\usr\bin;"+$env:Path
 
-#  before_build:
-#    - ps: git submodule update -q --init --recursive
+  before_build:
+    - ps: git submodule update -q --init --recursive
 
   build_script:
-#    - bash -c "./build.sh %PLATFORM%
-    - ps: echo "Building $env:platform"
+    - bash -c "./build.sh %PLATFORM%
 
   after_build:
-#    - ps: Compress-Archive -Path ".\Build\$env:platform\*" -DestinationPath ".\ffmpeg_$env:platform.zip"
+    - ps: Compress-Archive -Path ".\Build\$env:platform\*" -DestinationPath ".\ffmpeg_$env:platform.zip"
 
   artifacts:
-#    - path: '**\*.zip'
+    - path: '**\*.zip'
 
 -
   matrix:
