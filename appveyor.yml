@@ -43,7 +43,7 @@ for:
       - platform: nuget
 
   build_script:
-  - ps: echo "Building nuget"
+  - ps: echo "Building nuuuuuget"
 
   artifacts:
     - path: '**\*.nuget'
