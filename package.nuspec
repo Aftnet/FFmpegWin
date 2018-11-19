@@ -15,9 +15,11 @@
     <file src="*.props" target="build\native" />
     <file src="Build\desktop-x64\include\**" target="include" />
 
+    <file src="Build\uwp-x64\bin\*.lib" target="link\win10-x64-aot" />
+    <file src="Build\uwp-x64\bin\*.dll" target="runtimes\win10-x64-aot\native" />
     <file src="Build\uwp-x86\bin\*.lib" target="link\win10-x86-aot" />
     <file src="Build\uwp-x86\bin\*.dll" target="runtimes\win10-x86-aot\native" />
-
+    
     <file src="Build\desktop-x64\bin\*.lib" target="link\win10-x64" />
     <file src="Build\desktop-x64\bin\*.dll" target="runtimes\win10-x64\native" />
   </files>

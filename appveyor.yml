@@ -10,7 +10,7 @@ platform:
   - uwp-x86
 #  - uwp-arm64
 #  - uwp-arm
-#  - desktop-x64
+  - desktop-x64
 #  - desktop-x86
 #  - desktop-arm64
   - nuget
@@ -42,7 +42,8 @@ for:
       - platform: nuget
 
   build_script:
-  - ps: echo "Building nuuuuuget"
+    - ps: .\downloadArtifacts.ps1
+    - ps: nuget pack package.nuspec
 
   artifacts:
     - path: '**\*.nuget'
